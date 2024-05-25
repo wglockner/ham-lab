@@ -1,0 +1,8 @@
+prefix=/home/rmpl-plus/khi_control/install
+
+Name: khi_cx110l_gazebo
+Description: Description of khi_cx110l_gazebo
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,8 @@
+prefix=/home/rmpl-plus/khi_control/install
+
+Name: kaw_cx
+Description: Description of kaw_cx
+Version: 1.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

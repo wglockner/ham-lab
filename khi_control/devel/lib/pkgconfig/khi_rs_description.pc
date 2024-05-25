@@ -1,0 +1,8 @@
+prefix=/home/rmpl-plus/khi_control/devel
+
+Name: khi_rs_description
+Description: Description of khi_rs_description
+Version: 1.3.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

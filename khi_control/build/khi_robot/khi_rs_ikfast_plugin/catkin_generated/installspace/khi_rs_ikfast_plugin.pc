@@ -1,0 +1,8 @@
+prefix=/home/rmpl-plus/khi_control/install
+
+Name: khi_rs_ikfast_plugin
+Description: Description of khi_rs_ikfast_plugin
+Version: 1.3.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: moveit_core pluginlib roscpp tf_conversions

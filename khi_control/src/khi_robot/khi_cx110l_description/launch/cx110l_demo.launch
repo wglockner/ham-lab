@@ -1,0 +1,8 @@
+<launch>
+  <node 
+    name="state_publisher" 
+    type="cx110l_demo" 
+    pkg="khi_cx110l_description" 
+    output="screen">
+  </node>
+</launch>

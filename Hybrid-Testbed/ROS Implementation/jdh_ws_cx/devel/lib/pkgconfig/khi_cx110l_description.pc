@@ -1,0 +1,8 @@
+prefix=/home/rosindustrial/jdh_ws_cx/devel
+
+Name: khi_cx110l_description
+Description: Description of khi_cx110l_description
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,2 +1,0 @@
-khi_robot/khi_cx110l_description:khi_robot/khi_cx110l_gazebo:khi_robot/khi_cx110l_moveit_config:khi_robot/khi_robot:khi_robot/khi_robot_bringup:khi_robot/khi_robot_control:khi_robot/khi_robot_msgs:khi_robot/khi_robot_test:khi_robot/khi_rs080n_moveit_config
--DCATKIN_DEVEL_PREFIX=/home/rmpl-plus/khi_control/devel -DCMAKE_INSTALL_PREFIX=/home/rmpl-plus/khi_control/install -G Unix Makefiles

@@ -1,0 +1,8 @@
+prefix=/home/rosindustrial/jdh_ws_cx/devel
+
+Name: khi_cx110l_moveit_config
+Description: Description of khi_cx110l_moveit_config
+Version: 0.3.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,8 +1,0 @@
-prefix=/home/rmpl-plus/khi_control/devel
-
-Name: khi_cx_gazebo
-Description: Description of khi_cx_gazebo
-Version: 1.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

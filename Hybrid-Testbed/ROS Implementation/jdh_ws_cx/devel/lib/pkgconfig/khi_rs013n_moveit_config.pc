@@ -1,0 +1,8 @@
+prefix=/home/rosindustrial/jdh_ws_cx/devel
+
+Name: khi_rs013n_moveit_config
+Description: Description of khi_rs013n_moveit_config
+Version: 1.4.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,8 +1,0 @@
-prefix=/home/rmpl-plus/khi_control/install
-
-Name: khi_duaro_gazebo
-Description: Description of khi_duaro_gazebo
-Version: 1.3.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

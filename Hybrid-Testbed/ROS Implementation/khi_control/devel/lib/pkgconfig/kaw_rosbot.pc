@@ -1,8 +1,0 @@
-prefix=/home/rmpl-plus/khi_control/devel
-
-Name: kaw_rosbot
-Description: Description of kaw_rosbot
-Version: 0.3.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

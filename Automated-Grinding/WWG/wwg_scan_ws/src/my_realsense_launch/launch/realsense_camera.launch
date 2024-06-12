@@ -1,0 +1,19 @@
+<launch>
+    <arg name="depth_width" default="640"/>
+    <arg name="depth_height" default="480"/>
+    <arg name="depth_fps" default="30"/>
+    <arg name="enable_color" default="true"/>
+    <arg name="color_width" default="640"/>
+    <arg name="color_height" default="480"/>
+    <arg name="color_fps" default="30"/>
+    
+    <node name="realsense2_camera" pkg="realsense2_camera" type="realsense2_camera_node" output="screen">
+        <param name="depth_width" value="$(arg depth_width)"/>
+        <param name="depth_height" value="$(arg depth_height)"/>
+        <param name="depth_fps" value="$(arg depth_fps)"/>
+        <param name="enable_color" value="$(arg enable_color)"/>
+        <param name="color_width" value="$(arg color_width)"/>
+        <param name="color_height" value="$(arg color_height)"/>
+        <param name="color_fps" value="$(arg color_fps)"/>
+    </node>
+</launch>

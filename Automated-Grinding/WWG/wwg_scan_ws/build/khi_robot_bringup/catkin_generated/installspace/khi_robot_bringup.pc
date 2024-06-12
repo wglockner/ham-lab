@@ -1,0 +1,8 @@
+prefix=/home/rosindustrial/wwg_scan_ws/install
+
+Name: khi_robot_bringup
+Description: Description of khi_robot_bringup
+Version: 1.4.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,8 @@
+prefix=/home/rosindustrial/wwg_scan_ws/install
+
+Name: khi_robot_msgs
+Description: Description of khi_robot_msgs
+Version: 1.4.0
+Cflags: -I${prefix}/include
+Libs: -L${prefix}/lib 
+Requires: message_runtime std_msgs

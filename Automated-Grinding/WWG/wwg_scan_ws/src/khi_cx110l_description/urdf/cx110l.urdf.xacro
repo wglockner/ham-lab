@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<robot name="khi_cx110l" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find khi_cx110l_description)/urdf/cx110l_macro.xacro"/>
+
+  <!-- instantiate cx110l -->
+  <xacro:khi_cx110l prefix="" />
+
+  <!-- Fix cx110l to world -->
+
+  <link name="world"/>
+
+  <joint name="world2base" type="fixed">
+    <parent link="world"/>
+    <child link="base_plate"/>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+  </joint>
+  
+</robot>

@@ -1,0 +1,8 @@
+prefix=/home/rosindustrial/wwg_scan_ws/devel
+
+Name: khi_cx165l_description
+Description: Description of khi_cx165l_description
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

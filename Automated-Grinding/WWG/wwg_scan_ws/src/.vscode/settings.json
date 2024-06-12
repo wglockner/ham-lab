@@ -1,0 +1,26 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/rosindustrial/wwg_scan_ws/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "/home/rosindustrial/ros/snp_tools_ws/install/test_rviz_boundary_de/lib/python3.8/site-packages",
+        "/home/rosindustrial/ros/snp_tools_ws/install/tesseract_msgs/lib/python3.8/site-packages",
+        "/home/rosindustrial/ros/snp_tools_ws/install/rviz_polygon_selection_tool/lib/python3.8/site-packages",
+        "/home/rosindustrial/ros/snp_tools_ws/build/industrial_reconstruction",
+        "/home/rosindustrial/ros/snp_tools_ws/install/industrial_reconstruction/lib/python3.8/site-packages",
+        "/home/rosindustrial/ros/snp_tools_ws/install/industrial_reconstruction_msgs/lib/python3.8/site-packages",
+        "/home/rosindustrial/ros/snp_ws/install/snp_msgs/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/home/rosindustrial/wwg_scan_ws/devel/lib/python3/dist-packages",
+        "/opt/ros/noetic/lib/python3/dist-packages",
+        "/home/rosindustrial/ros/snp_tools_ws/install/test_rviz_boundary_de/lib/python3.8/site-packages",
+        "/home/rosindustrial/ros/snp_tools_ws/install/tesseract_msgs/lib/python3.8/site-packages",
+        "/home/rosindustrial/ros/snp_tools_ws/install/rviz_polygon_selection_tool/lib/python3.8/site-packages",
+        "/home/rosindustrial/ros/snp_tools_ws/build/industrial_reconstruction",
+        "/home/rosindustrial/ros/snp_tools_ws/install/industrial_reconstruction/lib/python3.8/site-packages",
+        "/home/rosindustrial/ros/snp_tools_ws/install/industrial_reconstruction_msgs/lib/python3.8/site-packages",
+        "/home/rosindustrial/ros/snp_ws/install/snp_msgs/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages"
+    ]
+}

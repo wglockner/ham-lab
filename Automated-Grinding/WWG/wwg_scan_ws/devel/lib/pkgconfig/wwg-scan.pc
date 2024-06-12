@@ -1,0 +1,8 @@
+prefix=/home/rosindustrial/wwg_scan_ws/devel
+
+Name: wwg-scan
+Description: Description of wwg-scan
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

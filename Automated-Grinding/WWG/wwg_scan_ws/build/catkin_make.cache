@@ -1,0 +1,2 @@
+khi_cx110l_description:khi_cx110l_moveit_config:khi_cx165l_description:khi_cx165l_moveit_config:khi_cx_gazebo:khi_robot:khi_robot_bringup:khi_robot_control:khi_robot_msgs:khi_robot_test:realsense-ros/realsense2_camera:realsense-ros/realsense2_description:wwg-scan
+-DCATKIN_DEVEL_PREFIX=/home/rosindustrial/wwg_scan_ws/devel -DCMAKE_INSTALL_PREFIX=/home/rosindustrial/wwg_scan_ws/install -G Unix Makefiles

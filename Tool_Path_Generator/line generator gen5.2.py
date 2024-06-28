@@ -76,6 +76,13 @@ def create_normal_arrows(points, normals, length=0.05, radius=0.001, colors=None
         arrows.append(arrow)
     return arrows
 
+# Function to create an arrow for the global normal
+def create_global_normal_arrow(global_normal, length=0.1, radius=0.002):
+    arrow = o3d.geometry.TriangleMesh.create_arrow(cylinder_radius=radius, cone_radius=2*radius, cylinder_height=length, cone_height=4*radius)
+    arrow.rotate(get_rotation_matrix(global_normal), center=(0, 0, 0))
+    arrow.paint_uniform_color([1, 0, 1])  # Magenta color for the global normal arrow
+    return arrow
+
 # Function to get rotation matrix aligning z-axis with given normal
 def get_rotation_matrix(normal):
     normal = normal / np.linalg.norm(normal)
@@ -98,6 +105,26 @@ def downsample(points, normals, factor=0.1):
     indices = np.random.choice(points.shape[0], int(points.shape[0] * factor), replace=False)
     return points[indices], normals[indices]
 
+# Function to calculate regional normals
+def calculate_regional_normals(points, normals, region_size, global_normal):
+    regions = {}
+    rotation_matrix = get_rotation_matrix(global_normal)
+    rotated_points = (rotation_matrix @ points.T).T
+
+    for point, normal in zip(rotated_points, normals):
+        region_key = (int(point[0] // region_size), int(point[1] // region_size))
+        if region_key not in regions:
+            regions[region_key] = []
+        regions[region_key].append(normal)
+    
+    regional_normals = {}
+    for region_key, region_normals in regions.items():
+        average_normal = np.mean(region_normals, axis=0)
+        average_normal /= np.linalg.norm(average_normal)
+        regional_normals[region_key] = average_normal
+
+    return regional_normals, rotation_matrix
+
 # Create GUI for selecting file and grind parameters
 def browse_file():
     file_path = filedialog.askopenfilename()
@@ -116,6 +143,8 @@ def start_processing():
     show_surface_lines = show_surface_lines_var.get()
     instep_option = instep_option_var.get()
     instep_custom_value = float(spin_instep_custom.get()) / 100.0
+    invert_normals_enabled = invert_normals_var.get()
+    normal_selection = normal_selection_var.get()
 
     grind_depth = float(spin_grind_depth.get())
     stone_diameter = float(spin_stone_diameter.get())
@@ -164,6 +193,18 @@ def start_processing():
     points = np.asarray(pcd.points)
     normals = np.asarray(pcd.normals)
     
+    # Invert normals if the option is enabled
+    if invert_normals_enabled:
+        normals = -normals
+
+    # Calculate the global normal
+    global_normal = np.mean(normals, axis=0)
+    global_normal /= np.linalg.norm(global_normal)  # Normalize the global normal
+    print(f"Global Normal: {global_normal}")
+
+    if normal_selection == "Regional":
+        regional_normals, rotation_matrix = calculate_regional_normals(points, normals, region_size, global_normal)
+    
     # Adjust instep based on the selected option
     if instep_option == "Custom":
         adjusted_instep = instep * instep_custom_value
@@ -177,6 +218,9 @@ def start_processing():
     downsampled_points, downsampled_normals = downsample(points, normals)
     normal_arrows = create_normal_arrows(downsampled_points, downsampled_normals)
     
+    # Create an arrow for the global normal
+    global_normal_arrow = create_global_normal_arrow(global_normal)
+
     # Extract and average lines on the surface parallel to the y-axis (stepover x)
     surface_stepover_lines, surface_initial_stepover_lines = extract_lines(points, stepover, tolerance, axis='x', initial_stepover=initial_stepover)
     averaged_surface_stepover_lines = average_lines(surface_stepover_lines, axis='x')
@@ -227,8 +271,9 @@ def start_processing():
                 cross_cut_cloud.paint_uniform_color([0, 0, 1])  # Set all points to blue
                 geometries.append(cross_cut_cloud)
 
-    # Add normal arrows to geometries
+    # Add normal arrows and the global normal arrow to geometries
     geometries.extend(normal_arrows)
+    geometries.append(global_normal_arrow)
 
     # Move points by z_offset increments and add them to the geometries
     z_height_count = 0
@@ -238,7 +283,17 @@ def start_processing():
 
     while z_height_count < anomaly_height:
         move_distance = (line_counter + 1) * z_offset
-        moved_points = move_points_by_normal(points, move_distance, normals)
+
+        if normal_selection == "Global":
+            moved_points = move_points_by_normal(points, move_distance, global_normal)
+        elif normal_selection == "Regional":
+            rotated_points = (rotation_matrix @ points.T).T
+            moved_points = np.zeros_like(points)
+            for i, point in enumerate(rotated_points):
+                region_key = (int(point[0] // region_size), int(point[1] // region_size))
+                if region_key in regional_normals:
+                    moved_points[i] = points[i] + move_distance * regional_normals[region_key]
+
         z_height_count += z_offset
 
         if moved_points.shape[0] > 0:
@@ -516,8 +571,21 @@ label_tolerance.grid(row=16, column=0, padx=10, pady=5, sticky=tk.W)
 label_tolerance_value = tk.Label(root, text="0.00")
 label_tolerance_value.grid(row=16, column=1, padx=10, pady=5, sticky=tk.W)
 
+# Invert Normals Toggle
+invert_normals_var = tk.IntVar()
+invert_normals_checkbox = tk.Checkbutton(root, text="Invert Normals", variable=invert_normals_var)
+invert_normals_checkbox.grid(row=17, column=0, columnspan=2, padx=10, pady=5, sticky=tk.W)
+
+# Normal Selection Options
+label_normal_selection = tk.Label(root, text="Normal Selection:")
+label_normal_selection.grid(row=18, column=0, padx=10, pady=5, sticky=tk.W)
+
+normal_selection_var = tk.StringVar(value="Global")
+normal_selection_menu = ttk.OptionMenu(root, normal_selection_var, "Global", "Global", "Regional")
+normal_selection_menu.grid(row=18, column=1, padx=10, pady=5)
+
 button_start = tk.Button(root, text="Start", command=start_processing)
-button_start.grid(row=17, column=0, columnspan=3, padx=10, pady=10)
+button_start.grid(row=19, column=0, columnspan=3, padx=10, pady=10)
 
 # Run the GUI main loop
 root.mainloop()
